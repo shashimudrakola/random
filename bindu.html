@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For Bindu 💖</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Quicksand", sans-serif;
+        background: hsl(350, 100%, 96%);
+        color: hsl(350, 80%, 25%);
+        overflow: hidden;
+        height: 100vh;
+        width: 100vw;
+      }
+      .container {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        user-select: none;
+      }
+      .edge-emoji {
+        position: fixed;
+        pointer-events: none;
+        user-select: none;
+        opacity: 0.3;
+      }
+      .main-content {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .wiggle-heart {
+        font-size: 3.2rem;
+        margin-bottom: 1rem;
+        animation: wiggle 2s ease-in-out infinite;
+      }
+      h1 {
+        font-size: clamp(1.5rem, 5vw, 3rem);
+        font-weight: 700;
+        color: hsl(340, 90%, 50%);
+        text-align: center;
+        padding: 0 1.5rem;
+        line-height: 1.2;
+        filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.05));
+      }
+      .subtitle {
+        font-size: clamp(1rem, 2.5vw, 1.15rem);
+        color: hsl(330, 70%, 65%);
+        font-weight: 600;
+        margin-top: 0.5rem;
+        margin-bottom: 2.5rem;
+      }
+      .buttons {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        position: relative;
+      }
+      .btn-yes {
+        font-family: "Quicksand", sans-serif;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        border-radius: 9999px;
+        background: hsl(340, 90%, 50%);
+        padding: 12px 28px;
+        color: #fff;
+        transition: all 0.3s;
+      }
+      .btn-yes:hover {
+        filter: brightness(1.1);
+      }
+      .btn-no {
+        font-family: "Quicksand", sans-serif;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        border-radius: 9999px;
+        background: hsl(350, 50%, 88%);
+        color: hsl(350, 40%, 45%);
+        padding: 12px 28px;
+        font-size: 16px;
+        transition: all 0.5s ease-out;
+      }
+      .plea {
+        margin-top: 2rem;
+        color: hsl(330, 95%, 15%);
+        font-weight: 600;
+        font-size: clamp(0.85rem, 2vw, 1rem);
+        animation: pulse 2s ease-in-out infinite;
+      }
+      /* Accepted screen */
+      .accepted-heart {
+        font-size: clamp(5rem, 15vw, 9rem);
+        margin-bottom: 1.5rem;
+        animation: pulse-heart 0.8s ease-in-out infinite;
+      }
+      .accepted-title {
+        font-size: clamp(2rem, 6vw, 4rem);
+        font-weight: 700;
+        color: hsl(340, 90%, 50%);
+        text-align: center;
+        padding: 0 1rem;
+        filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.05));
+      }
+      .accepted-sub {
+        font-size: clamp(1.2rem, 3vw, 1.5rem);
+        color: hsl(330, 70%, 65%);
+        margin-top: 1rem;
+        font-weight: 600;
+      }
+      .hidden {
+        display: none;
+      }
+
+      @keyframes float-slow {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-12px) rotate(4deg);
+        }
+      }
+      @keyframes pulse-heart {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+      }
+      @keyframes wiggle {
+        0%,
+        100% {
+          transform: rotate(0deg);
+        }
+        25% {
+          transform: rotate(-6deg);
+        }
+        75% {
+          transform: rotate(6deg);
+        }
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="ask-screen">
+      <div class="main-content">
+        <div class="wiggle-heart">💗</div>
+        <h1>Bindu, will you be my Huzz?</h1>
+        <p class="subtitle">nigga say yes 💘</p>
+        <div class="buttons">
+          <button class="btn-yes" id="btn-yes" onclick="sayYes()">
+            Yes! 💖
+          </button>
+          <button class="btn-no" id="btn-no" onclick="sayNo()">No</button>
+        </div>
+        <p class="plea hidden" id="plea"></p>
+      </div>
+    </div>
+
+    <div class="container hidden" id="yes-screen">
+      <div class="main-content">
+        <div class="accepted-heart">💖</div>
+        <h1 class="accepted-title">hehehehehehehehehehehehehe 💕</h1>
+        <p class="accepted-sub">sare phone chey night</p>
+      </div>
+    </div>
+
+    <script>
+      const EMOJIS = [
+        "💖",
+        "💗",
+        "💕",
+        "🌸",
+        "💘",
+        "🎀",
+        "🩷",
+        "💝",
+        "🫶",
+        "❤️",
+        "🦋",
+        "✨",
+        "💐",
+        "🌷",
+        "🐰",
+        "💞",
+        "🧸",
+        "🩰",
+      ];
+      const PLEAS = [
+        "HUHHHH? You tried to press NO?",
+        "Faakk really?",
+        "Ahuhhhhhh",
+        "ehe yes otthu",
+        "Antha balupu undoddhu manishi ki",
+        "press yes or be gay ",
+        "sare dengey site close chey ika",
+      ];
+
+      // Generate edge emojis
+      for (let i = 0; i < 24; i++) {
+        let x,
+          y,
+          side = i % 4;
+        if (side === 0) {
+          x = Math.random() * 100;
+          y = Math.random() * 12;
+        } else if (side === 1) {
+          x = Math.random() * 100;
+          y = 88 + Math.random() * 12;
+        } else if (side === 2) {
+          x = Math.random() * 10;
+          y = Math.random() * 100;
+        } else {
+          x = 90 + Math.random() * 10;
+          y = Math.random() * 100;
+        }
+        const sz = 14 + Math.random() * 12;
+        const dur = 5 + Math.random() * 5;
+        const del = Math.random() * -8;
+        const span = document.createElement("span");
+        span.className = "edge-emoji";
+        span.textContent = EMOJIS[i % EMOJIS.length];
+        span.style.cssText = `left:${x}%;top:${y}%;font-size:${sz}px;animation:float-slow ${dur}s ease-in-out ${del}s infinite`;
+        document.body.appendChild(span);
+      }
+
+      let clicks = 0;
+      const btnYes = document.getElementById("btn-yes");
+      const btnNo = document.getElementById("btn-no");
+      const plea = document.getElementById("plea");
+
+      function sayNo() {
+        clicks++;
+        const yesScale = Math.min(1 + clicks * 0.18, 3.2);
+        const noScale = Math.max(1 - clicks * 0.1, 0.25);
+        const jumpX = (Math.random() - 0.5) * 300;
+        const jumpY = (Math.random() - 0.5) * 200;
+
+        btnYes.style.transform = `scale(${yesScale})`;
+        btnYes.style.padding = `${14 + clicks * 2}px ${36 + clicks * 5}px`;
+        btnYes.style.fontSize = `${18 + clicks * 2}px`;
+        btnYes.style.boxShadow = `0 0 ${20 + clicks * 8}px hsl(340 90% 50% / 0.4)`;
+
+        btnNo.style.transform = `scale(${noScale}) translate(${jumpX}px, ${jumpY}px)`;
+
+        plea.classList.remove("hidden");
+        plea.textContent = PLEAS[Math.min(clicks - 1, PLEAS.length - 1)];
+      }
+
+      function sayYes() {
+        document.getElementById("ask-screen").classList.add("hidden");
+        document.getElementById("yes-screen").classList.remove("hidden");
+      }
+    </script>
+  </body>
+</html>
